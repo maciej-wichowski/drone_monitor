@@ -112,10 +112,8 @@ class DroneMonitor:
                 matching_build
                 and matching_build[0]["build"].get("status") != done_build_status
             ):
-                # title = f"Drone build {done_build_status}"
-                # message = f"{done_build['name']} at {done_build['build'].get('source')}"
                 title = f"Drone build {done_build_status}"
-                message = f"repository_name at branch_name"
+                message = f"{done_build['name']} at {done_build['build'].get('source')}"
                 os.system(f'notify-send "{title}" "{message}"')
 
     # TEXT FORMATTING
@@ -156,15 +154,9 @@ class DroneMonitor:
             else:
                 build_time = datetime.now() - date_started
 
-            # line = [
-            #     self.FORMAT_BOLD + repo_name + self.FORMAT_END,
-            #     branch_name,
-            #     self.format_status_text(status, status),
-            #     f"{build_time.seconds // 60}:{build_time.seconds % 60:02}",
-            # ]
             line = [
-                self.FORMAT_BOLD + "repository_name" + self.FORMAT_END,
-                "branch_name",
+                self.FORMAT_BOLD + repo_name + self.FORMAT_END,
+                branch_name,
                 self.format_status_text(status, status),
                 f"{build_time.seconds // 60}:{build_time.seconds % 60:02}",
             ]
